@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "APP CRUD PAM",
+    "slug": "app-crud-pam",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "description": "Aplicativo CRUD (Cadastro de usuários) feito por Carlos Henrique Lucena Barros e Lyniker Lucas Massola Bueno\n\nFuncionalidades: \n\n- Cadastro de Usuários, Visualização de Dados, Edição e Exclusão.\n- Sistema de reconhecimento por Login"
+  }
+}
