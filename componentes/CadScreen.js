@@ -80,13 +80,11 @@ function CadScreen({screenHook}){
       screenHook('cad')
     }
     
-    
-    
     return;
 
   }
 
-  //const [json, setJson] = useState([]);
+  const [json, setJson] = useState('');
 
 
   function requisition (cep) {
@@ -96,7 +94,8 @@ function CadScreen({screenHook}){
       .then(response => response.json())
       .then(function(json){
         
-        //JSON.stringify(json, null, "\t")
+        setJson(JSON.stringify(json, null, "\t"));
+        
         if(json.erro != true){
 
           setNewCity(json.localidade);
@@ -159,6 +158,12 @@ function CadScreen({screenHook}){
             <Text style={Style.inputLabel}>Complemento:</Text>
             <TextInput  onChangeText={(text)=>setNewComplement(text)} placeholderTextColor="#A864A8" placeholder="Insira um complemento" style={Style.inputs}/>
 
+
+            <Text style={Style.inputLabel}>
+              {
+                json
+              }
+            </Text>
             <View></View>
           </ScrollView>
         </View>
