@@ -102,7 +102,7 @@ export default function App() {
     
   }
 
-  const [screen, setScreen] = useState('cad');
+  const [screen, setScreen] = useState('home');
   
   if(screen == 'home'){
 

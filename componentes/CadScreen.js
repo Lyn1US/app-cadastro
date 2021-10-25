@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, FlatList, TouchableOpacity, Text, TextInput, ScrollView, Alert} from 'react-native';
 import Style from './style';
 import database from '../firebase';
@@ -21,12 +21,6 @@ function CadScreen({screenHook}){
   
   // REFERENCIAS DE COMPONENTES
 
-  const iCidade = useRef(null);
-  const iUF = useRef(null);
-  const iBairro = useRef(null);
-  const iRua = useRef(null);
-  
-
   var users = [];
   function getUsers () {
     
@@ -42,7 +36,7 @@ function CadScreen({screenHook}){
 
   function addUser(username,password, cep, city, uf, neighborhood, street, number, complement){
 
-    var idDoc = 0;
+    var idDoc = 1;
 
     
     var exists = false;
@@ -50,6 +44,7 @@ function CadScreen({screenHook}){
     if(username !== '' && password !== '' && cep !== '' && city !== '' && uf !== ''
     && neighborhood !== '' && street !== '' && number !== ''){
 
+      
       users.map((user)=>{
         if(username === user.username){
           exists = true;
@@ -75,7 +70,7 @@ function CadScreen({screenHook}){
         })
 
         alert('Usuário cadastrado com sucesso')
-        screenHook('view')
+        screenHook('view');
       }
 
     }
@@ -102,15 +97,8 @@ function CadScreen({screenHook}){
       .then(function(json){
         
         //JSON.stringify(json, null, "\t")
-        console.log(json);
         if(json.erro != true){
 
-          alert('aqui')
-
-          iCidade.current.value = json.localidade; 
-          iUF.current.value = json.uf; 
-          iBairro.current.value = json.bairro; 
-          iRua.current.value = json.logradouro;
           setNewCity(json.localidade);
           setNewStreet(json.logradouro);
           setNewUF(json.uf);
@@ -154,16 +142,16 @@ function CadScreen({screenHook}){
             <TextInput maxLength={8} onChangeText={(text)=>setNewCEP(text)} onBlur={() => requisition(newCEP)} placeholderTextColor="#A864A8" placeholder="Insira seu CEP" style={Style.inputs}/>
           
             <Text style={Style.inputLabel}>Cidade:</Text>
-            <TextInput ref={iCidade} onChangeText={(text)=>setNewCity(text)} placeholderTextColor="#A864A8" placeholder="Insira sua cidade" style={Style.inputs}/>
+            <TextInput value={newCity} onChangeText={(text)=>setNewCity(text)} placeholderTextColor="#A864A8" placeholder="Insira sua cidade" style={Style.inputs}/>
           
             <Text style={Style.inputLabel}>UF:</Text>
-            <TextInput ref={iUF} maxLength={2} onChangeText={(text)=>setNewUF(text)} placeholderTextColor="#A864A8" placeholder="Insira sua unidade federal" style={Style.inputs}/>
+            <TextInput value={newUF} maxLength={2} onChangeText={(text)=>setNewUF(text)} placeholderTextColor="#A864A8" placeholder="Insira sua unidade federal" style={Style.inputs}/>
           
             <Text style={Style.inputLabel}>Bairro:</Text>
-            <TextInput ref={iBairro} onChangeText={(text)=>setNewNeighborhood(text)} placeholderTextColor="#A864A8" placeholder="Insira seu bairro" style={Style.inputs}/>
+            <TextInput value={newNeighborhood} onChangeText={(text)=>setNewNeighborhood(text)} placeholderTextColor="#A864A8" placeholder="Insira seu bairro" style={Style.inputs}/>
           
             <Text style={Style.inputLabel}>Rua:</Text>
-            <TextInput ref={iRua} onChangeText={(text)=>setNewStreet(text)} placeholderTextColor="#A864A8" placeholder="Insira sua rua" style={Style.inputs}/>
+            <TextInput value={newStreet} onChangeText={(text)=>setNewStreet(text)} placeholderTextColor="#A864A8" placeholder="Insira sua rua" style={Style.inputs}/>
           
             <Text style={Style.inputLabel}>N°:</Text>
             <TextInput keyboardType={'numeric'}  onChangeText={(text)=>setNewNumber(text)} placeholderTextColor="#A864A8" placeholder="Insira seu n°" style={Style.inputs}/>
